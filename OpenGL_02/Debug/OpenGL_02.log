@@ -1,3 +1,0 @@
-﻿LINK : warning LNK4098: 默认库“LIBCMT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“glew32s.lib(glew.obj)”或在“F:\c++ exeacise\OpenGl_Test\OpenGL_03\Debug\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样
-  OpenGL_02.vcxproj -> F:\c++ exeacise\OpenGl_Test\OpenGL_03\Debug\OpenGL_02.exe
