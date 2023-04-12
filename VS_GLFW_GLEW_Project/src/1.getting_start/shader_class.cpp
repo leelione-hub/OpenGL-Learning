@@ -30,7 +30,7 @@ int main()
 		return -1;
 	}
 
-	Shader ourShader("E:/OpenGL/VS_GLFW_GLEW_Project/src/1.getting_start/3.3.shader.vs", "E:/OpenGL/VS_GLFW_GLEW_Project/src/1.getting_start/3.3.shader.fs");
+	Shader ourShader("./src/1.getting_start/3.3.shader.vs", "./src/1.getting_start/3.3.shader.fs");
 
 	float vertices[] = {
 		// positions         // colors
