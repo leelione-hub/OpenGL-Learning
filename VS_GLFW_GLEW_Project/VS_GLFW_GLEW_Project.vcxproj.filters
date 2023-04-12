@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\1.getting_start">
+      <UniqueIdentifier>{1afff3e5-eb6d-49f5-9eea-4141fc9e6697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\test">
+      <UniqueIdentifier>{16a22a71-b458-4cfb-b72f-28e900b1240c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -25,11 +31,25 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\1.getting_start\shader_class.cpp">
+      <Filter>源文件\1.getting_start</Filter>
+    </ClCompile>
     <ClCompile Include="src\application.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\test</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
-      <Filter>源文件</Filter>
+      <Filter>源文件\test</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>源文件\test</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\1.getting_start\3.3.shader.fs">
+      <Filter>源文件\1.getting_start</Filter>
+    </None>
+    <None Include="src\1.getting_start\3.3.shader.vs">
+      <Filter>源文件\1.getting_start</Filter>
+    </None>
   </ItemGroup>
 </Project>

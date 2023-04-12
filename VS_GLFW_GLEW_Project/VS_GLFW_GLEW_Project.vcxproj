@@ -108,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\OpenGL\VS_GLFW_GLEW_Project\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,8 +139,14 @@
     <ResourceCompile Include="VS_GLFW_GLEW_Project.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="src\1.getting_start\shader_class.cpp" />
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\1.getting_start\3.3.shader.fs" />
+    <None Include="src\1.getting_start\3.3.shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
