@@ -1,5 +1,7 @@
 GLLibary/
 
+.vs
+
 VS_GLFW_GLEW_Project/x64
 
 VS_GLFW_GLEW_Project/.vs
