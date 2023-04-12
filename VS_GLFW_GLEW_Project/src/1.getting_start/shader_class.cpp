@@ -63,6 +63,14 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		ourShader.use();
+
+		float timeValue = glfwGetTime();
+		float greenValue = sin(timeValue) * 0.5f + 0.5f;
+		float xPos = sin(timeValue) * 0.5f;
+		ourShader.SetFloat4("ourPos", xPos, 0.0f, 0.0f, 0.0f);
+		ourShader.SetFloat4("ourColor", 0.0f, greenValue, 0.0f, 1.0f);
+
+
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
