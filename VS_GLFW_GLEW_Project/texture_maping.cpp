@@ -33,9 +33,9 @@ int main()
 		cout << "Failed to initialize GLAD" << endl;
 		return -1;
 	}
-	unsigned int* textures = GetCustomTextureData();
+	//unsigned int* textures = GetCustomTextureData();
 
-	DrawSquare_texture(window, textures);
+	DrawSquare_texture(window, NULL);
 
 	return 0;
 }
@@ -77,7 +77,7 @@ unsigned int* GetCustomTextureData()
 	data = stbi_load("./resources/textures/awesomeface.png", &width, &height, &nrChannels, 0);
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -169,6 +169,7 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+	stbi_set_flip_vertically_on_load(true);
 	data = stbi_load("./resources/textures/awesomeface.png", &width, &height, &nrChannels, 0);
 	if (data)
 	{
@@ -181,6 +182,7 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 	}
 	stbi_image_free(data);
 	
+
 	ourShader.use();
 	ourShader.setInt("texture1", 0);
 	//glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
