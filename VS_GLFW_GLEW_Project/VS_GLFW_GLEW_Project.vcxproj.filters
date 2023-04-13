@@ -19,6 +19,12 @@
     <Filter Include="源文件\test">
       <UniqueIdentifier>{16a22a71-b458-4cfb-b72f-28e900b1240c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\1.getting_start\ShaderClass">
+      <UniqueIdentifier>{c634d27f-ef7a-454d-9266-9bed42de9aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\1.getting_start\Texture">
+      <UniqueIdentifier>{6402a6ee-2d17-437b-8407-f3e6b6d3b4f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -31,9 +37,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\1.getting_start\shader_class.cpp">
-      <Filter>源文件\1.getting_start</Filter>
-    </ClCompile>
     <ClCompile Include="src\application.cpp">
       <Filter>源文件\test</Filter>
     </ClCompile>
@@ -43,13 +46,25 @@
     <ClCompile Include="Shader.cpp">
       <Filter>源文件\test</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.getting_start\shader_class.cpp">
+      <Filter>源文件\1.getting_start\ShaderClass</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_maping.cpp">
+      <Filter>源文件\1.getting_start\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs">
-      <Filter>源文件\1.getting_start</Filter>
+      <Filter>源文件\1.getting_start\ShaderClass</Filter>
     </None>
     <None Include="src\1.getting_start\3.3.shader.vs">
-      <Filter>源文件\1.getting_start</Filter>
+      <Filter>源文件\1.getting_start\ShaderClass</Filter>
+    </None>
+    <None Include="src\1.getting_start\Texture\shader.fs">
+      <Filter>源文件\1.getting_start\Texture</Filter>
+    </None>
+    <None Include="src\1.getting_start\Texture\shader.vs">
+      <Filter>源文件\1.getting_start\Texture</Filter>
     </None>
   </ItemGroup>
 </Project>

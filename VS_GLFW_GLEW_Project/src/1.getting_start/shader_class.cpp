@@ -67,8 +67,9 @@ int main()
 		float timeValue = glfwGetTime();
 		float greenValue = sin(timeValue) * 0.5f + 0.5f;
 		float xPos = sin(timeValue) * 0.5f;
-		ourShader.SetFloat4("ourPos", xPos, 0.0f, 0.0f, 0.0f);
-		ourShader.SetFloat4("ourColor", 0.0f, greenValue, 0.0f, 1.0f);
+		float yPos = cos(timeValue) * 0.25f+0.25f;
+		ourShader.SetFloat4("ourPos", xPos, yPos, 0.0f, 0.0f);
+		ourShader.SetFloat4("ourColor", GLclampf(xPos), GLclampf(yPos), 0.0f, 1.0f);
 
 
 		glBindVertexArray(VAO);

@@ -140,13 +140,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="src\1.getting_start\shader_class.cpp" />
-    <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\1.getting_start\shader_class.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\application.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="texture_maping.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs" />
     <None Include="src\1.getting_start\3.3.shader.vs" />
+    <None Include="src\1.getting_start\Texture\shader.fs" />
+    <None Include="src\1.getting_start\Texture\shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
