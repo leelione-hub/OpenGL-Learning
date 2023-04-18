@@ -25,6 +25,9 @@
     <Filter Include="源文件\1.getting_start\Texture">
       <UniqueIdentifier>{6402a6ee-2d17-437b-8407-f3e6b6d3b4f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\1.getting_start\Transform">
+      <UniqueIdentifier>{fbc7ed30-ea7e-44d8-b888-6428e2545e2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -51,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="texture_maping.cpp">
       <Filter>源文件\1.getting_start\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\1.getting_start\Transform\transformations.cpp">
+      <Filter>源文件\1.getting_start\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
