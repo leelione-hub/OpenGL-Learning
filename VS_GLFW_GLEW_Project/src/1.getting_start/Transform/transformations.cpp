@@ -154,7 +154,7 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 	{
 		processInput(window);
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);  
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glActiveTexture(GL_TEXTURE0);
@@ -163,9 +163,10 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 		glBindTexture(GL_TEXTURE_2D, texture2);
 		
 		glm::mat4 trans = glm::mat4(1.0f);
-		
-		trans = glm::translate(trans, glm::vec3(sin((float)glfwGetTime()) * 0.5f, -0.5f, 0.0f));
+		trans = glm::translate(trans, glm::vec3(sin((float)glfwGetTime()), -0.5f, 0.0f));
 		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		float scale = sin((float)glfwGetTime()) * 0.5f + 0.5f;
+		trans = glm::scale(trans, glm::vec3(scale, scale, 1.0f));
 
 		ourShader.use();
 		ourShader.SetMatrix4fv("transform", glm::value_ptr(trans));
