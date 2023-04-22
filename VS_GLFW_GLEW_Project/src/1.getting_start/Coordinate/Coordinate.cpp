@@ -29,7 +29,7 @@ int main()
 	trans = glm::translate(trans, glm::vec3(1.0f, 1.0f, 0.0f));
 	vec = trans * vec;
 	cout << vec.x << vec.y << vec.z << endl;
-	
+
 	GLFWwindow* window = InitGLFW();
 	if (window == NULL)
 	{
@@ -148,30 +148,39 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 	ourShader.setInt("texture1", 0);
 	//glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
 	ourShader.setInt("texture2", 1);
-	ourShader.SetMatrix4fv("transform", GetMatrix4());
 
 	while (!glfwWindowShouldClose(window))
 	{
 		processInput(window);
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);  
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
-		
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::translate(trans, glm::vec3(sin((float)glfwGetTime()), -0.5f, 0.0f));
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-		float scale = sin((float)glfwGetTime()) * 0.5f + 0.5f;
-		trans = glm::scale(trans, glm::vec3(scale, scale, 1.0f));
+
+		//glm::mat4 trans = glm::mat4(1.0f);
+		//trans = glm::translate(trans, glm::vec3(sin((float)glfwGetTime()), -0.5f, 0.0f));
+		//trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+		//float scale = sin((float)glfwGetTime()) * 0.5f + 0.5f;
+		//trans = glm::scale(trans, glm::vec3(scale, scale, 1.0f));
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0, 0.0f, 0.0f));
+
+		glm::mat4 view = glm::mat4(1.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+		glm::mat4 projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(45.0f),(float)SCR_WIDTH/(float)SCR_HEIGHT,0.1f,100.0f);
+
 
 		ourShader.use();
-		ourShader.SetMatrix4fv("transform", glm::value_ptr(trans));
-		/*unsigned int transfomloc = glGetUniformLocation(ourShader.ID, "transform");
-		glUniformMatrix4fv(transfomloc, 1, GL_FALSE, glm::value_ptr(trans));*/
+		ourShader.SetMatrix4fv("model", glm::value_ptr(model));
+		ourShader.SetMatrix4fv("view", glm::value_ptr(view));
+		ourShader.SetMatrix4fv("projection", glm::value_ptr(projection));
 
 		glBindVertexArray(VAO);
 		//glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -188,14 +197,6 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	// ------------------------------------------------------------------
 	glfwTerminate();
-}
-
-GLfloat* GetMatrix4()
-{
-	glm::mat4 trans = glm::mat4(1.0f);
-	trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-	trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
-	return glm::value_ptr(trans);
 }
 
 GLFWwindow* InitGLFW()

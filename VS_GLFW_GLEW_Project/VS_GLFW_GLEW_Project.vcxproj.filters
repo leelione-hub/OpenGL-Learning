@@ -28,6 +28,9 @@
     <Filter Include="源文件\1.getting_start\Transform">
       <UniqueIdentifier>{fbc7ed30-ea7e-44d8-b888-6428e2545e2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\1.getting_start\Coordinate">
+      <UniqueIdentifier>{a674a3f3-26b2-490c-97f0-17575c23ca08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -58,6 +61,9 @@
     <ClCompile Include="src\1.getting_start\Transform\transformations.cpp">
       <Filter>源文件\1.getting_start\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.getting_start\Coordinate\Coordinate.cpp">
+      <Filter>源文件\1.getting_start\Coordinate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs">
@@ -71,6 +77,12 @@
     </None>
     <None Include="src\1.getting_start\Texture\shader.vs">
       <Filter>源文件\1.getting_start\Texture</Filter>
+    </None>
+    <None Include="src\1.getting_start\Coordinate\shader.vs">
+      <Filter>源文件\1.getting_start\Coordinate</Filter>
+    </None>
+    <None Include="src\1.getting_start\Coordinate\shader.fs">
+      <Filter>源文件\1.getting_start\Coordinate</Filter>
     </None>
   </ItemGroup>
 </Project>
