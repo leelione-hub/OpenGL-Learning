@@ -97,6 +97,19 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
+	glm::vec3 cubePositions[] = {
+	  glm::vec3(0.0f,  0.0f,  0.0f),
+	  glm::vec3(2.0f,  5.0f, -15.0f),
+	  glm::vec3(-1.5f, -2.2f, -2.5f),
+	  glm::vec3(-3.8f, -2.0f, -12.3f),
+	  glm::vec3(2.4f, -0.4f, -3.5f),
+	  glm::vec3(-1.7f,  3.0f, -7.5f),
+	  glm::vec3(1.3f, -2.0f, -2.5f),
+	  glm::vec3(1.5f,  2.0f, -2.5f),
+	  glm::vec3(1.5f,  0.2f, -1.5f),
+	  glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
+
 	unsigned int indices[] =
 	{
 		0, 1, 3,  // first Triangle
@@ -204,8 +217,8 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 		//float scale = sin((float)glfwGetTime()) * 0.5f + 0.5f;
 		//trans = glm::scale(trans, glm::vec3(scale, scale, 1.0f));
 
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		/*glm::mat4 model = glm::mat4(1.0f);
+		model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));*/
 
 		glm::mat4 view = glm::mat4(1.0f);
 		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
@@ -215,12 +228,22 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 
 
 		ourShader.use();
-		ourShader.SetMatrix4fv("model", glm::value_ptr(model));
+		/*ourShader.SetMatrix4fv("model", glm::value_ptr(model));*/
 		ourShader.SetMatrix4fv("view", glm::value_ptr(view));
 		ourShader.SetMatrix4fv("projection", glm::value_ptr(projection));
 
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		for (unsigned int i = 0; i < 10; i++) 
+		{
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
+			unsigned int ratio = (i + 1) % 3;
+			float angle = 20.0f * (ratio == 1 ? 1 : 0);
+			model = glm::rotate(model, (float)glfwGetTime() * glm::radians(angle), glm::vec3(0.1f, 0.3f, 0.5f));
+			ourShader.SetMatrix4fv("model", glm::value_ptr(model));
+			glDrawArrays(GL_TRIANGLES, 0,36);
+		}
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
