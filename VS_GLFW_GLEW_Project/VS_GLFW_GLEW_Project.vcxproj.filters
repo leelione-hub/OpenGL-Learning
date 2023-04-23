@@ -31,6 +31,9 @@
     <Filter Include="源文件\1.getting_start\Coordinate">
       <UniqueIdentifier>{a674a3f3-26b2-490c-97f0-17575c23ca08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\1.getting_start\Camera">
+      <UniqueIdentifier>{54dc30a0-c925-4a41-9470-5f1a956d0671}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -64,6 +67,9 @@
     <ClCompile Include="src\1.getting_start\Coordinate\Coordinate.cpp">
       <Filter>源文件\1.getting_start\Coordinate</Filter>
     </ClCompile>
+    <ClCompile Include="src\1.getting_start\Camera\Camera.cpp">
+      <Filter>源文件\1.getting_start\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs">
@@ -83,6 +89,12 @@
     </None>
     <None Include="src\1.getting_start\Coordinate\shader.fs">
       <Filter>源文件\1.getting_start\Coordinate</Filter>
+    </None>
+    <None Include="src\1.getting_start\Camera\shader.vs">
+      <Filter>源文件\1.getting_start\Camera</Filter>
+    </None>
+    <None Include="src\1.getting_start\Camera\shader.fs">
+      <Filter>源文件\1.getting_start\Camera</Filter>
     </None>
   </ItemGroup>
 </Project>

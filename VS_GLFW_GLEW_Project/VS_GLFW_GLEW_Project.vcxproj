@@ -140,7 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="src\1.getting_start\Coordinate\Coordinate.cpp" />
+    <ClCompile Include="src\1.getting_start\Camera\Camera.cpp" />
+    <ClCompile Include="src\1.getting_start\Coordinate\Coordinate.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\1.getting_start\shader_class.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -158,6 +161,8 @@
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs" />
     <None Include="src\1.getting_start\3.3.shader.vs" />
+    <None Include="src\1.getting_start\Camera\shader.fs" />
+    <None Include="src\1.getting_start\Camera\shader.vs" />
     <None Include="src\1.getting_start\Coordinate\shader.fs" />
     <None Include="src\1.getting_start\Coordinate\shader.vs" />
     <None Include="src\1.getting_start\Texture\shader.fs" />
