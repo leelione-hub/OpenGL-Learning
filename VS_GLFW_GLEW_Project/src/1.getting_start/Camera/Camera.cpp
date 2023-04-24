@@ -8,6 +8,7 @@
 #include<glm/gtc/type_ptr.hpp>
 #define STB_IMAGE_IMPLEMENTATION
 #include<learnopengl/stb_image.h>
+#include<learnopengl/camera.h>
 using namespace std;
 //using namespace glm;
 const unsigned int SCR_WIDTH = 800;
@@ -22,25 +23,30 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 unsigned int* GetCustomTextureData();
 void DrawSquare_texture(GLFWwindow* window, unsigned int* textures);
 GLfloat* GetMatrix4();
+
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = SCR_WIDTH / 2.0;
+float lastY = SCR_HEIGHT / 2.0;
+bool firstMouse = true;
+
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront =glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp =glm::vec3(0.0f, 1.0f, 0.0f);
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 float sensitiveity = 0.05f;
-bool firstMouse = true;
 
 float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
 float pitch = 0.0f;
-float lastX = 800.0f / 2.0;
-float lastY = 600.0 / 2.0;
+
 float fov = 45.0f, maxFov = 60.0f;
 
 bool fps = true;
 
+
+
 int main()
 {
-
 	glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f);
 	//glm::mat4 trans;
 	glm::mat4 trans = glm::mat4(1.0f);
@@ -240,10 +246,11 @@ void DrawSquare_texture(GLFWwindow* window, unsigned int* textures)
 		float camZ = cos(glfwGetTime()) * radius;
 		view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));*/
 
-		view = lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		//view = lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		view = camera.GetViewMatrix();
 
 		glm::mat4 projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
 
 		ourShader.use();
@@ -324,15 +331,26 @@ void processInput(GLFWwindow* window)
 		}
 	}
 
-
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cameraFront;
+	{
+		camera.ProcessKeyboard(FORWARD, deltaTime);
+	}
+		//cameraPos += cameraSpeed * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cameraFront;
+	{
+		camera.ProcessKeyboard(BACKWARD, deltaTime);
+	}
+		//cameraPos -= cameraSpeed * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	{
+		camera.ProcessKeyboard(LEFT, deltaTime);
+	}
+		//cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	{
+		camera.ProcessKeyboard(RIGHT, deltaTime);
+	}
+		//cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 	if(fps)
 	{
 		cameraPos.y = 0.0f;
@@ -377,6 +395,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	front.y = sin(glm::radians(pitch));
 	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	cameraFront = glm::normalize(front);
+	//camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
