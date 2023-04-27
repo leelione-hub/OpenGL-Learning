@@ -140,7 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="src\1.getting_start\Camera\Camera.cpp" />
+    <ClCompile Include="src\1.getting_start\Camera\Camera.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\1.getting_start\Coordinate\Coordinate.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -150,6 +152,7 @@
     <ClCompile Include="src\1.getting_start\Transform\transformations.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\2.lighting\Color\Color.cpp" />
     <ClCompile Include="src\application.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -167,6 +170,8 @@
     <None Include="src\1.getting_start\Coordinate\shader.vs" />
     <None Include="src\1.getting_start\Texture\shader.fs" />
     <None Include="src\1.getting_start\Texture\shader.vs" />
+    <None Include="src\2.lighting\Color\shader.fs" />
+    <None Include="src\2.lighting\Color\shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

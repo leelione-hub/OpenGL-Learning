@@ -34,6 +34,12 @@
     <Filter Include="源文件\1.getting_start\Camera">
       <UniqueIdentifier>{54dc30a0-c925-4a41-9470-5f1a956d0671}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\2.lighting">
+      <UniqueIdentifier>{4fe6a85e-141b-4ca8-b472-325d50d2002e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\2.lighting\Color">
+      <UniqueIdentifier>{6693e531-8cd5-476c-adff-35867e209c9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -70,6 +76,9 @@
     <ClCompile Include="src\1.getting_start\Camera\Camera.cpp">
       <Filter>源文件\1.getting_start\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="src\2.lighting\Color\Color.cpp">
+      <Filter>源文件\2.lighting\Color</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs">
@@ -95,6 +104,12 @@
     </None>
     <None Include="src\1.getting_start\Camera\shader.fs">
       <Filter>源文件\1.getting_start\Camera</Filter>
+    </None>
+    <None Include="src\2.lighting\Color\shader.vs">
+      <Filter>源文件\2.lighting\Color</Filter>
+    </None>
+    <None Include="src\2.lighting\Color\shader.fs">
+      <Filter>源文件\2.lighting\Color</Filter>
     </None>
   </ItemGroup>
 </Project>
