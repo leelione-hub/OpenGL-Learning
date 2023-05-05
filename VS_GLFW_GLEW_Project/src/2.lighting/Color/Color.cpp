@@ -20,7 +20,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 5.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -56,7 +56,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 
 
-	Shader lightShader("./src/2.lighting/Color/shader.vs", "./src/2.lighting/Color/shader.fs");
+	Shader lightShader("./src/2.lighting/Color/shader.vs", "./src/2.lighting/Color/light.fs");
 	Shader ourShader("./src/2.lighting/Color/shader.vs", "./src/2.lighting/Color/shader.fs");
 
 	float vertices[] = {
@@ -134,15 +134,13 @@ int main()
 
 		lightShader.use();
 
-		lightShader.SetFloat3("objectColor", 1.0f, 0.5f, 0.31f);
-		lightShader.SetFloat3("lightColor", 1.0f, 1.0f, 1.0f);
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		lightShader.SetMatrix4fv("projection", glm::value_ptr(projection));
 		lightShader.SetMatrix4fv("view", glm::value_ptr(view));
 		// world transformation
 		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(1.0f, 0.5f, -1.0f));
+		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.2f));
 		lightShader.SetMatrix4fv("model", glm::value_ptr(model));
 
@@ -150,8 +148,9 @@ int main()
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-
 		ourShader.use();
+		ourShader.SetFloat3("objectColor", 1.0f, 0.5f, 0.31f);
+		ourShader.SetFloat3("lightColor", 1.0f, 1.0f, 1.0f);
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(-0.5f, -0.5f, 0.0f));
 		model = glm::rotate(model,glm::radians(45.0f),glm::vec3(0.0f,1.0f,0.0f));

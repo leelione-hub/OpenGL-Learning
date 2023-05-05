@@ -170,6 +170,7 @@
     <None Include="src\1.getting_start\Coordinate\shader.vs" />
     <None Include="src\1.getting_start\Texture\shader.fs" />
     <None Include="src\1.getting_start\Texture\shader.vs" />
+    <None Include="src\2.lighting\Color\light.fs" />
     <None Include="src\2.lighting\Color\shader.fs" />
     <None Include="src\2.lighting\Color\shader.vs" />
   </ItemGroup>

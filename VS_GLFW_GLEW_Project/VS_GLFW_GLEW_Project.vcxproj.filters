@@ -40,6 +40,9 @@
     <Filter Include="源文件\2.lighting\Color">
       <UniqueIdentifier>{6693e531-8cd5-476c-adff-35867e209c9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\2.lighting\Lighting">
+      <UniqueIdentifier>{6ddd8602-c492-4268-a46e-d51e2af21597}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -109,6 +112,9 @@
       <Filter>源文件\2.lighting\Color</Filter>
     </None>
     <None Include="src\2.lighting\Color\shader.fs">
+      <Filter>源文件\2.lighting\Color</Filter>
+    </None>
+    <None Include="src\2.lighting\Color\light.fs">
       <Filter>源文件\2.lighting\Color</Filter>
     </None>
   </ItemGroup>
