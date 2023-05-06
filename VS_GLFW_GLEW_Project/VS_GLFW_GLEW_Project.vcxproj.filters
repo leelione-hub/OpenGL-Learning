@@ -82,6 +82,9 @@
     <ClCompile Include="src\2.lighting\Color\Color.cpp">
       <Filter>源文件\2.lighting\Color</Filter>
     </ClCompile>
+    <ClCompile Include="src\2.lighting\Lighting\Lighting.cpp">
+      <Filter>源文件\2.lighting\Lighting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs">
@@ -116,6 +119,12 @@
     </None>
     <None Include="src\2.lighting\Color\light.fs">
       <Filter>源文件\2.lighting\Color</Filter>
+    </None>
+    <None Include="src\2.lighting\Lighting\shader.vs">
+      <Filter>源文件\2.lighting\Lighting</Filter>
+    </None>
+    <None Include="src\2.lighting\Lighting\shader.fs">
+      <Filter>源文件\2.lighting\Lighting</Filter>
     </None>
   </ItemGroup>
 </Project>
