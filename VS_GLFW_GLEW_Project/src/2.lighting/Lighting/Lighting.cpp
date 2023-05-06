@@ -30,7 +30,7 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 // lighting
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(1.2f, 0.0f, 2.0f);
 
 int main()
 {
@@ -154,16 +154,17 @@ int main()
 		ourShader.SetFloat3("objectColor", 1.0f, 0.5f, 0.31f);
 		ourShader.SetFloat3("lightColor", 1.0f, 1.0f, 1.0f);
 		ourShader.SetVec3("lightPos", lightPos);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-0.5f, -0.5f, 0.0f));
-		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		ourShader.SetVec3("viewPos", camera.Position);
+		
 
 		/*glm::mat4 view = glm::mat4(1.0f);
 		view = camera.GetViewMatrix();
 
 		glm::mat4 projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);*/
-
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-0.5f, -0.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		ourShader.SetMatrix4fv("model", glm::value_ptr(model));
 		ourShader.SetMatrix4fv("view", glm::value_ptr(view));
 		ourShader.SetMatrix4fv("projection", glm::value_ptr(projection));
