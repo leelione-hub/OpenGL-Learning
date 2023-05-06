@@ -142,6 +142,7 @@ int main()
 		lightShader.SetMatrix4fv("view", glm::value_ptr(view));
 		// world transformation
 		glm::mat4 model = glm::mat4(1.0f);
+		lightPos = glm::vec3(glm::cos(currentFrame), 0.5f, glm::sin(currentFrame));
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.1f));
 		lightShader.SetMatrix4fv("model", glm::value_ptr(model));
@@ -163,7 +164,7 @@ int main()
 		glm::mat4 projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);*/
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(-0.5f, -0.5f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		ourShader.SetMatrix4fv("model", glm::value_ptr(model));
 		ourShader.SetMatrix4fv("view", glm::value_ptr(view));
