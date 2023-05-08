@@ -46,6 +46,9 @@
     <Filter Include="源文件\2.lighting\Materials">
       <UniqueIdentifier>{7402c619-3756-4198-9905-4ae0680ec724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\2.lighting\Lightingmaps">
+      <UniqueIdentifier>{38e4b574-c690-4ccd-8226-c0a2c1d1c253}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -90,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="src\2.lighting\Materials\Materials.cpp">
       <Filter>源文件\2.lighting\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.lighting\Lightingmaps\Lightingmaps.cpp">
+      <Filter>源文件\2.lighting\Lightingmaps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +143,12 @@
     </None>
     <None Include="src\2.lighting\Materials\shader.fs">
       <Filter>源文件\2.lighting\Materials</Filter>
+    </None>
+    <None Include="src\2.lighting\Lightingmaps\shader.vs">
+      <Filter>源文件\2.lighting\Lightingmaps</Filter>
+    </None>
+    <None Include="src\2.lighting\Lightingmaps\shader.fs">
+      <Filter>源文件\2.lighting\Lightingmaps</Filter>
     </None>
   </ItemGroup>
 </Project>
