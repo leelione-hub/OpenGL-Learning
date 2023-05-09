@@ -164,9 +164,11 @@ int main()
 
 	unsigned int diffuse = loadTexture("./resources/textures/container2.png");
 	unsigned int specular = loadTexture("./resources/textures/container2_specular.png");
+	unsigned int emission = loadTexture("./resources/textures/matrix.jpg");
 	ourShader.use();
 	ourShader.setInt("material.diffuse", 0);
 	ourShader.setInt("material.specular", 1);
+	ourShader.setInt("material.emission", 2);
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = glfwGetTime();
@@ -196,6 +198,7 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		ourShader.use();
+		ourShader.setFloat("_time", currentFrame);
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
 		model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -222,6 +225,8 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, diffuse);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, specular);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, emission);
 		
 
 		glBindVertexArray(VAO);
