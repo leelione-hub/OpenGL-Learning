@@ -49,6 +49,9 @@
     <Filter Include="源文件\2.lighting\Lightingmaps">
       <UniqueIdentifier>{38e4b574-c690-4ccd-8226-c0a2c1d1c253}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\2.lighting\Lightcasters">
+      <UniqueIdentifier>{5f25cf9c-0538-4062-a7b4-96da7e910159}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -96,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="src\2.lighting\Lightingmaps\Lightingmaps.cpp">
       <Filter>源文件\2.lighting\Lightingmaps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.lighting\Lightcasters\Lightcasters.cpp">
+      <Filter>源文件\2.lighting\Lightcasters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +155,12 @@
     </None>
     <None Include="src\2.lighting\Lightingmaps\shader.fs">
       <Filter>源文件\2.lighting\Lightingmaps</Filter>
+    </None>
+    <None Include="src\2.lighting\Lightcasters\shader.vs">
+      <Filter>源文件\2.lighting\Lightcasters</Filter>
+    </None>
+    <None Include="src\2.lighting\Lightcasters\shader.fs">
+      <Filter>源文件\2.lighting\Lightcasters</Filter>
     </None>
   </ItemGroup>
 </Project>

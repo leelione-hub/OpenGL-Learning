@@ -155,7 +155,10 @@
     <ClCompile Include="src\2.lighting\Color\Color.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\2.lighting\Lightingmaps\Lightingmaps.cpp" />
+    <ClCompile Include="src\2.lighting\Lightcasters\Lightcasters.cpp" />
+    <ClCompile Include="src\2.lighting\Lightingmaps\Lightingmaps.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\2.lighting\Lighting\Lighting.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -182,6 +185,8 @@
     <None Include="src\2.lighting\Color\light.fs" />
     <None Include="src\2.lighting\Color\shader.fs" />
     <None Include="src\2.lighting\Color\shader.vs" />
+    <None Include="src\2.lighting\Lightcasters\shader.fs" />
+    <None Include="src\2.lighting\Lightcasters\shader.vs" />
     <None Include="src\2.lighting\Lightingmaps\shader.fs" />
     <None Include="src\2.lighting\Lightingmaps\shader.vs" />
     <None Include="src\2.lighting\Lighting\shader.fs" />
