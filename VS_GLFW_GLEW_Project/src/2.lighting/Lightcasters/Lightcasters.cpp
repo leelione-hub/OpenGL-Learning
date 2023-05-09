@@ -29,10 +29,11 @@ struct Light
 	glm::vec3 ambient;
 	glm::vec3 diffuse;
 	glm::vec3 specular;
-	glm::vec4 direction;
+	glm::vec4 direction;		//direction的w分量用来控制是否启用attuation
 	float constant;
 	float linear;
 	float quadratic;
+	float cutOff;
 };
 
 
@@ -192,10 +193,11 @@ int main()
 		glm::vec3(0.2f, 0.2f, 0.2f),
 		glm::vec3(0.5f, 0.5f, 0.5f), 
 		glm::vec3(1.0f, 1.0f, 1.0f),
-		glm::vec4(-0.2f,-1.0f,-0.3f,1.0f),
-		lightAttenuation[1].x,
-		lightAttenuation[1].y,
-		lightAttenuation[1].z
+		glm::vec4(-0.2f,-1.0f,-0.3f,0.0f),
+		lightAttenuation[3].x,
+		lightAttenuation[3].y,
+		lightAttenuation[3].z,
+		glm::cos(glm::radians(12.5f))
 	};
 
 
@@ -246,14 +248,15 @@ int main()
 
 		ourShader.setFloat("material.shininess", material.shininess);
 
-		ourShader.SetVec3("light.position", light.position);
+		ourShader.SetVec3("light.position", camera.Position);
 		ourShader.SetVec3("light.ambient", light.ambient);
 		ourShader.SetVec3("light.diffuse", light.diffuse);
 		ourShader.SetVec3("light.specular", light.specular);
-		ourShader.SetVec4("light.direction", light.direction);
+		ourShader.SetVec4("light.direction", glm::vec4(camera.Front,0.0));
 		ourShader.setFloat("light.constant", light.constant);
 		ourShader.setFloat("light.linear", light.linear);
 		ourShader.setFloat("light.quadratic", light.quadratic);
+		ourShader.setFloat("light.cutOff", light.cutOff);
 
 
 		glActiveTexture(GL_TEXTURE0);
