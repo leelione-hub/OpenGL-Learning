@@ -29,7 +29,10 @@ struct Light
 	glm::vec3 ambient;
 	glm::vec3 diffuse;
 	glm::vec3 specular;
-	glm::vec3 direction;
+	glm::vec4 direction;
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 
@@ -167,14 +170,35 @@ int main()
 		32.0f
 	};
 
+	glm::vec3 lightAttenuation[] =
+	{
+		glm::vec3(1.0f,0.7f,1.8f),			//7
+		glm::vec3(1.0f,0.35f,0.44f),		//13
+		glm::vec3(1.0f,0.22f,0.20f),		//20
+		glm::vec3(1.0f,0.14f,0.07f),		//32
+		glm::vec3(1.0f,0.09f,0.032f),		//50
+		glm::vec3(1.0f,0.07f,0.017f),		//65
+		glm::vec3(1.0f,0.045f,0.0075f),		//100
+		glm::vec3(1.0f,0.027f,0.0028f),		//160
+		glm::vec3(1.0f,0.022f,0.0019f),		//200
+		glm::vec3(1.0f,0.014f,0.0007f),		//325
+		glm::vec3(1.0f,0.007f,0.0002f),		//600
+		glm::vec3(1.0f,0.0014f,0.000007f),	//3250
+	};
+
 	Light light
 	{
 		lightPos,
 		glm::vec3(0.2f, 0.2f, 0.2f),
-		glm::vec3(0.5f, 0.5f, 0.5f),
+		glm::vec3(0.5f, 0.5f, 0.5f), 
 		glm::vec3(1.0f, 1.0f, 1.0f),
-		glm::vec3(-0.2f,-1.0f,-0.3f)
+		glm::vec4(-0.2f,-1.0f,-0.3f,1.0f),
+		lightAttenuation[1].x,
+		lightAttenuation[1].y,
+		lightAttenuation[1].z
 	};
+
+
 
 	unsigned int diffuse = loadTexture("./resources/textures/container2.png");
 	unsigned int specular = loadTexture("./resources/textures/container2_specular.png");
@@ -218,20 +242,18 @@ int main()
 		ourShader.SetMatrix4fv("view", glm::value_ptr(view));
 		ourShader.SetMatrix4fv("projection", glm::value_ptr(projection));
 
-
 		ourShader.SetVec3("viewPos", camera.Position);
 
-		//urShader.SetVec3("material.ambient", material.ambient);
-		//ourShader.SetVec3("material.diffuse", material.diffuse);
-		ourShader.SetVec3("material.specular", material.specular);
 		ourShader.setFloat("material.shininess", material.shininess);
 
-
+		ourShader.SetVec3("light.position", light.position);
 		ourShader.SetVec3("light.ambient", light.ambient);
 		ourShader.SetVec3("light.diffuse", light.diffuse);
 		ourShader.SetVec3("light.specular", light.specular);
-		ourShader.SetVec3("light.position", light.position);
-		ourShader.SetVec3("light.direction", light.direction);
+		ourShader.SetVec4("light.direction", light.direction);
+		ourShader.setFloat("light.constant", light.constant);
+		ourShader.setFloat("light.linear", light.linear);
+		ourShader.setFloat("light.quadratic", light.quadratic);
 
 
 		glActiveTexture(GL_TEXTURE0);
