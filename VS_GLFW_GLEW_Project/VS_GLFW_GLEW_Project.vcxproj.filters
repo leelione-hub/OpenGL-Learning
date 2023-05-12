@@ -52,6 +52,9 @@
     <Filter Include="源文件\2.lighting\Lightcasters">
       <UniqueIdentifier>{5f25cf9c-0538-4062-a7b4-96da7e910159}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\2.lighting\Multiplelights">
+      <UniqueIdentifier>{5f4be26a-3b88-4037-a1e3-63cff3c3d2f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -102,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="src\2.lighting\Lightcasters\Lightcasters.cpp">
       <Filter>源文件\2.lighting\Lightcasters</Filter>
+    </ClCompile>
+    <ClCompile Include="src\2.lighting\Multiplelights\Multiplelights.cpp">
+      <Filter>源文件\2.lighting\Multiplelights</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +167,12 @@
     </None>
     <None Include="src\2.lighting\Lightcasters\shader.fs">
       <Filter>源文件\2.lighting\Lightcasters</Filter>
+    </None>
+    <None Include="src\2.lighting\Multiplelights\shader.vs">
+      <Filter>源文件\2.lighting\Multiplelights</Filter>
+    </None>
+    <None Include="src\2.lighting\Multiplelights\shader.fs">
+      <Filter>源文件\2.lighting\Multiplelights</Filter>
     </None>
   </ItemGroup>
 </Project>

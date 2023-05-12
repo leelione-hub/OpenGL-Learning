@@ -155,7 +155,9 @@
     <ClCompile Include="src\2.lighting\Color\Color.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\2.lighting\Lightcasters\Lightcasters.cpp" />
+    <ClCompile Include="src\2.lighting\Lightcasters\Lightcasters.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\2.lighting\Lightingmaps\Lightingmaps.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -164,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="src\2.lighting\Materials\Materials.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\2.lighting\Multiplelights\Multiplelights.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\application.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -193,6 +198,8 @@
     <None Include="src\2.lighting\Lighting\shader.vs" />
     <None Include="src\2.lighting\Materials\shader.fs" />
     <None Include="src\2.lighting\Materials\shader.vs" />
+    <None Include="src\2.lighting\Multiplelights\shader.fs" />
+    <None Include="src\2.lighting\Multiplelights\shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
