@@ -72,7 +72,6 @@ void framebuffer_size_callbalc(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-unsigned int LoadTexture(string path);
 unsigned int loadTexture(char const* path);
 
 const unsigned int SCR_WIDTH = 800;
@@ -254,7 +253,7 @@ int main()
 
 	unsigned int diffuse = loadTexture("./resources/textures/container2.png");
 	unsigned int specular = loadTexture("./resources/textures/container2_specular.png");
-	unsigned int emission = loadTexture("./resources/textures/matrix.jpg");
+	unsigned int emission = loadTexture("./resources/textures/1000.png");
 	ourShader.use();
 	ourShader.setInt("material.diffuse", 0);
 	ourShader.setInt("material.specular", 1);

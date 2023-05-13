@@ -77,7 +77,8 @@ void main()
 	}
 
 	//SpotLight
-	result += CalcSpotLight(spotLight,normal,viewDir);
+	vec3 spot = CalcSpotLight(spotLight,normal,viewDir);
+	result = (1.0 - spot.x) * result + spot.x * spot;
 
 	FragColor = vec4(result,1.0);
 }
@@ -131,6 +132,8 @@ vec3 CalcSpotLight(Spotlight light,vec3 normal,vec3 viewDir)
 	vec3 ambient = light.ambient * vec3(texture(material.diffuse,TexCoords));
 	vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse,TexCoords));
 	vec3 specular = light.specular * spec * vec3(texture(material.specular,TexCoords));
+	vec3 emission = texture(material.emission,(-FragPos.xy + vec2(0.5,0.5))).xyz;
 
-	return (ambient + (diffuse + specular) * intensity) * attenuation;
+	return (ambient + (emission ) * intensity) * attenuation;
+	//return emission;
 }
