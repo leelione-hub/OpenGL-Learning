@@ -15,13 +15,7 @@
 
 using namespace std;
 
-struct Material
-{
-	glm::vec3 ambient;
-	glm::vec3 diffuse;
-	glm::vec3 specular;
-	float shininess;
-};
+#define NR_POINT_LIGHTS 4
 
 struct Light
 {
@@ -37,7 +31,41 @@ struct Light
 	float outCutOff;
 };
 
+struct DirLight
+{
+	glm::vec3 direction;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+};
 
+struct PointLight
+{
+	glm::vec3 position;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+
+	float constant;
+	float linear;
+	float quadratic;
+};
+
+struct Spotlight
+{
+	glm::vec3 position;
+	glm::vec3 direction;
+	glm::vec3 ambient;
+	glm::vec3 diffuse;
+	glm::vec3 specular;
+
+	float constant;
+	float linear;
+	float quadratic;
+
+	float cutOff;
+	float outCutOff;
+};
 
 GLFWwindow* InitGLFW();
 void framebuffer_size_callbalc(GLFWwindow* window, int width, int height);
@@ -85,9 +113,8 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-
 	Shader lightShader("./src/2.lighting/Lighting/shader.vs", "./src/2.lighting/Color/light.fs");
-	Shader ourShader("./src/2.lighting/Lightcasters/shader.vs", "./src/2.lighting/Lightcasters/shader.fs");
+	Shader ourShader("./src/2.lighting/Multiplelights/shader.vs", "./src/2.lighting/Multiplelights/shader.fs");
 
 	float vertices[] = {
 		// positions          // normals           // texture coords
@@ -133,6 +160,7 @@ int main()
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
+
 	glm::vec3 cubePositions[] = {
 		glm::vec3(0.0f,  0.0f,  0.0f),
 		glm::vec3(2.0f,  5.0f, -15.0f),
@@ -146,6 +174,12 @@ int main()
 		glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 
+	glm::vec3 pointLightPositions[] = {
+	glm::vec3(0.7f,  0.2f,  2.0f),
+	glm::vec3(2.3f, -3.3f, -4.0f),
+	glm::vec3(-4.0f,  2.0f, -12.0f),
+	glm::vec3(0.0f,  0.0f, -3.0f)
+	};
 	unsigned int VBO, VAO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -164,14 +198,6 @@ int main()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
-	Material material
-	{
-		glm::vec3(1.0f, 0.5f, 0.31f),
-		glm::vec3(1.0f, 0.5f, 0.31f),
-		glm::vec3(0.5f, 0.5f, 0.31f),
-		32.0f
-	};
-
 	glm::vec3 lightAttenuation[] =
 	{
 		glm::vec3(1.0f,0.7f,1.8f),			//7
@@ -188,21 +214,43 @@ int main()
 		glm::vec3(1.0f,0.0014f,0.000007f),	//3250
 	};
 
-	Light light
+
+	DirLight dirLight
 	{
-		lightPos,
-		glm::vec3(0.2f, 0.2f, 0.2f),
-		glm::vec3(0.75f, 0.75f, 0.75f),
+		glm::vec3(-0.2f, -1.0f, -0.3f),
+		glm::vec3(0.05f, 0.05f, 0.05f),
+		glm::vec3(0.4f, 0.4f, 0.4f),
+		glm::vec3(0.5f, 0.5f, 0.5f)
+	};
+
+	Spotlight spotLight
+	{
+		camera.Position,
+		camera.Front,
+		glm::vec3(0.0f, 0.0f, 0.0f),
 		glm::vec3(1.0f, 1.0f, 1.0f),
-		glm::vec4(-0.2f,-1.0f,-0.3f,1.0f),
-		lightAttenuation[5].x,
-		lightAttenuation[5].y,
-		lightAttenuation[5].z,
+		glm::vec3(1.0f, 1.0f, 1.0f),
+		lightAttenuation[4].x,
+		lightAttenuation[4].y,
+		lightAttenuation[4].z,
 		glm::cos(glm::radians(12.5f)),
 		glm::cos(glm::radians(15.0f))
 	};
 
-
+	PointLight pointLights[NR_POINT_LIGHTS];
+	for (int i = 0; i < NR_POINT_LIGHTS; i++)
+	{
+		pointLights[i] =
+		{
+			pointLightPositions[i],
+			glm::vec3(0.05f, 0.05f, 0.05f),
+			glm::vec3(0.8f, 0.8f, 0.8f),
+			glm::vec3(1.0f, 1.0f, 1.0f),
+			lightAttenuation[4].x,
+			lightAttenuation[4].y,
+			lightAttenuation[4].z
+		};
+	}
 
 	unsigned int diffuse = loadTexture("./resources/textures/container2.png");
 	unsigned int specular = loadTexture("./resources/textures/container2_specular.png");
@@ -219,7 +267,7 @@ int main()
 
 		processInput(window);
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.6275f, 0.3216f, 0.1765f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		lightShader.use();
@@ -230,14 +278,16 @@ int main()
 		lightShader.SetMatrix4fv("view", glm::value_ptr(view));
 		// world transformation
 		glm::mat4 model = glm::mat4(1.0f);
-		//lightPos = glm::vec3(glm::cos(currentFrame) * 2.0f,0.0f, glm::sin(currentFrame) * 2.0f);
-		model = glm::translate(model, lightPos);
-		model = glm::scale(model, glm::vec3(0.25f));
-		lightShader.SetMatrix4fv("model", glm::value_ptr(model));
-
-		// render the cube
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		float pointLightLength = sizeof(pointLightPositions) / sizeof(pointLightPositions[0]);
+		for (int i = 0; i < pointLightLength; i++)
+		{
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, pointLightPositions[i]);
+			model = glm::scale(model, glm::vec3(0.25f));
+			lightShader.SetMatrix4fv("model", glm::value_ptr(model));
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
 
 		ourShader.use();
 		ourShader.setFloat("_time", currentFrame);
@@ -245,21 +295,60 @@ int main()
 
 		ourShader.SetMatrix4fv("view", glm::value_ptr(view));
 		ourShader.SetMatrix4fv("projection", glm::value_ptr(projection));
-
 		ourShader.SetVec3("viewPos", camera.Position);
+		ourShader.setFloat("material.shininess", 32.0f);
 
-		ourShader.setFloat("material.shininess", material.shininess);
 
-		ourShader.SetVec3("light.position", camera.Position);
-		ourShader.SetVec3("light.ambient", light.ambient);
-		ourShader.SetVec3("light.diffuse", light.diffuse);
-		ourShader.SetVec3("light.specular", light.specular);
-		ourShader.SetVec4("light.direction", glm::vec4(camera.Front, 1.0));
-		ourShader.setFloat("light.constant", light.constant);
-		ourShader.setFloat("light.linear", light.linear);
-		ourShader.setFloat("light.quadratic", light.quadratic);
-		ourShader.setFloat("light.cutOff", light.cutOff);
-		ourShader.setFloat("light.outCutOff", light.outCutOff);
+		//directionLight
+		ourShader.SetVec3("dirLight.direction", dirLight.direction);
+		ourShader.SetVec3("dirLight.ambient", dirLight.ambient);
+		ourShader.SetVec3("dirLight.diffuse", dirLight.diffuse);
+		ourShader.SetVec3("dirLight.specular", dirLight.specular);
+
+		//PointLight
+		ourShader.SetVec3("pointLights[0].position", pointLights[0].position);
+		ourShader.SetVec3("pointLights[0].ambient", pointLights[0].ambient);
+		ourShader.SetVec3("pointLights[0].diffuse", pointLights[0].diffuse);
+		ourShader.SetVec3("pointLights[0].specular", pointLights[0].specular);
+		ourShader.setFloat("pointLights[0].constant", pointLights[0].constant);
+		ourShader.setFloat("pointLights[0].linear", pointLights[0].linear);
+		ourShader.setFloat("pointLights[0].quadratic", pointLights[0].quadratic);
+
+		ourShader.SetVec3("pointLights[1].position", pointLights[1].position);
+		ourShader.SetVec3("pointLights[1].ambient", pointLights[1].ambient);
+		ourShader.SetVec3("pointLights[1].diffuse", pointLights[1].diffuse);
+		ourShader.SetVec3("pointLights[1].specular", pointLights[1].specular);
+		ourShader.setFloat("pointLights[1].constant", pointLights[1].constant);
+		ourShader.setFloat("pointLights[1].linear", pointLights[1].linear);
+		ourShader.setFloat("pointLights[1].quadratic", pointLights[1].quadratic);
+
+		ourShader.SetVec3("pointLights[2].position", pointLights[2].position);
+		ourShader.SetVec3("pointLights[2].ambient", pointLights[2].ambient);
+		ourShader.SetVec3("pointLights[2].diffuse", pointLights[2].diffuse);
+		ourShader.SetVec3("pointLights[2].specular", pointLights[2].specular);
+		ourShader.setFloat("pointLights[2].constant", pointLights[2].constant);
+		ourShader.setFloat("pointLights[2].linear", pointLights[2].linear);
+		ourShader.setFloat("pointLights[2].quadratic", pointLights[2].quadratic);
+
+		ourShader.SetVec3("pointLights[3].position", pointLights[3].position);
+		ourShader.SetVec3("pointLights[3].ambient", pointLights[3].ambient);
+		ourShader.SetVec3("pointLights[3].diffuse", pointLights[3].diffuse);
+		ourShader.SetVec3("pointLights[3].specular", pointLights[3].specular);
+		ourShader.setFloat("pointLights[3].constant", pointLights[3].constant);
+		ourShader.setFloat("pointLights[3].linear", pointLights[3].linear);
+		ourShader.setFloat("pointLights[3].quadratic", pointLights[3].quadratic);
+
+		//SpotLight
+		ourShader.SetVec3("spotLight.position", camera.Position);
+		ourShader.SetVec3("spotLight.direction", camera.Front);
+		ourShader.SetVec3("spotLight.ambient", spotLight.ambient);
+		ourShader.SetVec3("spotLight.diffuse", spotLight.diffuse);
+		ourShader.SetVec3("spotLight.specular", spotLight.specular);
+		ourShader.setFloat("spotLight.constant", spotLight.constant);
+		ourShader.setFloat("spotLight.linear", spotLight.linear);
+		ourShader.setFloat("spotLight.quadratic", spotLight.quadratic);
+		ourShader.setFloat("spotLight.cutOff", spotLight.cutOff);
+		ourShader.setFloat("spotLight.outCutOff", spotLight.outCutOff);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, diffuse);
