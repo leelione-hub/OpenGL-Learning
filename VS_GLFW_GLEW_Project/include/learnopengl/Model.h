@@ -11,18 +11,18 @@
 #include<assimp/scene.h>
 #include<assimp/postprocess.h>
 
-//#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
 #include<learnopengl/stb_image.h>
 
 #include<string>
 #include<vector>
-
+unsigned int TextureFromFile(const char* path, const string& directory);
 class Model
 {
 public:
-	Model(char* path)
+	Model(const char* path)
 	{
-
+		loadModel(path);
 	}
 
 	void Draw(Shader shader)
@@ -95,16 +95,16 @@ private:
 				vec.x = mesh->mTextureCoords[0][i].x;
 				vec.y = mesh->mTextureCoords[0][i].y;
 				vertex.TexCoords = vec;
-				// tangent
-				vector.x = mesh->mTangents[i].x;
-				vector.y = mesh->mTangents[i].y;
-				vector.z = mesh->mTangents[i].z;
-				vertex.Tangent = vector;
-				// bitangent
-				vector.x = mesh->mBitangents[i].x;
-				vector.y = mesh->mBitangents[i].y;
-				vector.z = mesh->mBitangents[i].z;
-				vertex.Bitangent = vector;
+				//// tangent
+				//vector.x = mesh->mTangents[i].x;
+				//vector.y = mesh->mTangents[i].y;
+				//vector.z = mesh->mTangents[i].z;
+				//vertex.Tangent = vector;
+				//// bitangent
+				//vector.x = mesh->mBitangents[i].x;
+				//vector.y = mesh->mBitangents[i].y;
+				//vector.z = mesh->mBitangents[i].z;
+				//vertex.Bitangent = vector;
 			}
 			else
 			{

@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\learnopengl\Mesh.h" />
+    <ClInclude Include="include\learnopengl\Model.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -168,8 +170,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\2.lighting\Multiplelights\Multiplelights.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\3.model\Loading\Loading.cpp" />
     <ClCompile Include="src\application.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -201,6 +204,8 @@
     <None Include="src\2.lighting\Materials\shader.vs" />
     <None Include="src\2.lighting\Multiplelights\shader.fs" />
     <None Include="src\2.lighting\Multiplelights\shader.vs" />
+    <None Include="src\3.model\Loading\shader.fs" />
+    <None Include="src\3.model\Loading\shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
