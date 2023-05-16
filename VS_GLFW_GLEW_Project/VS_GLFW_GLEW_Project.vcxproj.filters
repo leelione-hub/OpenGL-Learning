@@ -174,5 +174,6 @@
     <None Include="src\2.lighting\Multiplelights\shader.fs">
       <Filter>源文件\2.lighting\Multiplelights</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
