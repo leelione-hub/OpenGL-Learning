@@ -17,7 +17,7 @@ struct Vertex
 {
 	glm::vec3 Position;
 	glm::vec3 Normal;
-	glm::vec3 TexCoords;
+	glm::vec2 TexCoords;
 	glm::vec3 Tangent;
 	glm::vec3 Bitangent;
 	int m_boneIDs[MAX_BONE_INFLUENCE];
@@ -28,7 +28,7 @@ struct Texture
 {
 	unsigned int id;
 	string type;
-	string path;
+	aiString path;
 };
 
 class Mesh
