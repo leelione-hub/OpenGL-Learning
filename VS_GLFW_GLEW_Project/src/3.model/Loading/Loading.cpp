@@ -8,6 +8,7 @@
 #include<learnopengl/shader_s.h>
 #include <learnopengl/camera.h>
 #include <learnopengl/model.h>
+#include<learnopengl/Light/Light.h>
 
 #include <iostream>
 
@@ -17,8 +18,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1280;
+const unsigned int SCR_HEIGHT = 720;
 
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -69,7 +70,7 @@ int main()
     }
 
     // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
-    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(false);
 
     // configure global opengl state
     // -----------------------------
@@ -79,6 +80,8 @@ int main()
     // -------------------------
     Shader ourShader("./src/3.model/Loading/shader.vs", "./src/3.model/Loading/shader.fs");
 
+    Shader lightShader("./src/2.lighting/Lighting/shader.vs", "./src/2.lighting/Color/light.fs");
+
     // load models
     // -----------
     Model ourModel("./resources/objects/nanosuit/nanosuit.obj");
@@ -86,6 +89,17 @@ int main()
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    //InitLightData
+    DirLight dirLight
+    {
+        glm::vec3(-0.2f, -1.0f, -0.3f),
+        glm::vec3(0.25f, 0.25f, 0.25f),
+        glm::vec3(0.8f, 0.8f, 0.8f),
+        glm::vec3(1.0f, 1.0f, 1.0f)
+    };
+
+
 
     // render loop
     // -----------
@@ -109,6 +123,15 @@ int main()
         // don't forget to enable shader before setting uniforms
         ourShader.use();
 
+        //directionLight
+        glm::vec3 dir = dirLight.direction + glm::cos(currentFrame);
+        ourShader.SetVec3("dirLight.direction", dir);
+        ourShader.SetVec3("dirLight.ambient", dirLight.ambient);
+        ourShader.SetVec3("dirLight.diffuse", dirLight.diffuse);
+        ourShader.SetVec3("dirLight.specular", dirLight.specular);
+        ourShader.setFloat("material.shininess", 36.0f);
+
+        ourShader.SetVec3("viewPos", camera.Position);
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
@@ -118,8 +141,9 @@ int main()
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
         ourShader.SetMatrix4fv("model", glm::value_ptr(model));
+
         ourModel.Draw(ourShader);
 
 

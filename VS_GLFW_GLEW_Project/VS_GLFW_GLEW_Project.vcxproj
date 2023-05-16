@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\learnopengl\Light\Light.h" />
     <ClInclude Include="include\learnopengl\Mesh.h" />
     <ClInclude Include="include\learnopengl\Model.h" />
     <ClInclude Include="resource.h" />
