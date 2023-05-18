@@ -231,7 +231,7 @@ int main()
 		glm::vec3(1.0f, 1.0f, 1.0f),
 		lightAttenuation[4].x,
 		lightAttenuation[4].y,
-		lightAttenuation[4].z,
+		lightAttenuation[4].z, 
 		glm::cos(glm::radians(12.5f)),
 		glm::cos(glm::radians(15.0f))
 	};

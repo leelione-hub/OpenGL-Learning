@@ -124,6 +124,9 @@
     <ClCompile Include="src\3.model\Loading\Loading.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\4.advanced\2.stencil_testing\stencil_testing.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\1.getting_start\3.3.shader.fs">
